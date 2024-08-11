@@ -1,10 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { useGetProductsQuery } from "../state/api";
+import { useCreateProductMutation, useGetProductsQuery } from "../state/api";
 import Header from "../(components)/Header";
 import { PlusCircleIcon, SearchIcon } from "lucide-react";
 import Rating from "../(components)/Rating";
+import CreateProductModal from "./CreateProductModal";
+
+type ProductDataForm = {
+  name: string;
+  price: number;
+  rating?: number;
+  stockQuantity: number;
+};
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,6 +22,11 @@ const Products = () => {
     isLoading,
     isError,
   } = useGetProductsQuery(searchTerm);
+  const [createProduct] = useCreateProductMutation();
+
+  const handleCreateProduct = async (productData: ProductDataForm) => {
+    await createProduct(productData);
+  };
 
   if (isLoading) {
     return <div className="py-4">Loading...</div>;
@@ -83,6 +96,12 @@ const Products = () => {
           ))
         )}
       </div>
+      {/* modal */}
+      <CreateProductModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onCreate={handleCreateProduct}
+      ></CreateProductModal>
     </div>
   );
 };
