@@ -38,7 +38,10 @@ export const createProduct = async (
       },
     });
     res.status(201).json(product);
-  } catch (error) {
-    res.status(500).json({ message: "Error creating products" });
+  } catch (error: Error | any) {
+    console.error("Error creating product:", error.message, error.code); // Log specific error details
+    res
+      .status(500)
+      .json({ message: "Error creating product", error: error.message });
   }
 };
