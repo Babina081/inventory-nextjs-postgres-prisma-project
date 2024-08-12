@@ -69,7 +69,7 @@ export const api = createApi({
     }),
     createProduct: build.mutation<Product, NewProduct>({
       query: (newProduct) => ({
-        url: "/newProducts",
+        url: "/products",
         method: "POST",
         body: newProduct,
       }),
