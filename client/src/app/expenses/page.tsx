@@ -5,9 +5,14 @@ import {
   useGetExpensesByCategoryQuery,
 } from "../state/api";
 import Header from "../(components)/Header";
-import { ClassNames } from "@emotion/react";
-import SelectInput from "@mui/material/Select/SelectInput";
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
 type AggregatedDataItem = {
   name: string;
